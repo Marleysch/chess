@@ -10,21 +10,30 @@ using namespace std;
 
 class Knight: public Piece{
     public:
-    string color;
-    pair<char, int> curr_square;
-    vector<pair<char,int>> possible_squares;
     
-    Knight(string incolor, char rank, int row){
-        color = incolor;
-        curr_square = {rank,row};
+    Knight(string incolor, char rank, int row) : Piece(incolor,rank,row){
         calc_possible_squares();
     };
 
-    string toString() const override{
+    virtual string toString() const override{
         return "Knight";
     }
 
+    void move(pair<char, int> square) override{
+        int possible_squares_size = possible_squares.size(); 
+        if (check_membership(square, possible_squares, possible_squares_size)){
+            curr_square = square;
+            for (int i=0; i<possible_squares.size();i++)
+                possible_squares.pop_back();
+            calc_possible_squares();
+        }
+        else
+            cout << "you cant go there" << endl;
+    };
+
+    protected:
     void calc_possible_squares(){
+        possible_squares.clear();
         pair<int,int> square = {letter_to_number(curr_square.first), curr_square.second};
 
         for (int i=0; i<2; i++){
@@ -48,17 +57,7 @@ class Knight: public Piece{
         }
     };
 
-    void move(pair<char, int> square){
-        int possible_squares_size = possible_squares.size(); 
-        if (check_membership(square, possible_squares, possible_squares_size)){
-            curr_square = square;
-            for (int i=0; i<possible_squares.size();i++)
-                possible_squares.pop_back();
-            calc_possible_squares();
-        }
-        else
-            cout << "you cant go there" << endl;
-    };
+
 
 };
 

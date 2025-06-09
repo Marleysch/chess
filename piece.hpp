@@ -10,14 +10,17 @@ class Piece{
     pair<char, int> curr_square;
     vector<pair<char,int>> possible_squares;
 
+    Piece(string incolor, char rank, int row) : color(incolor),curr_square({rank,row}){};
+
     virtual string toString() const = 0;
 
+    virtual void move(pair<char,int> square){};
+    
+    protected:
     void calc_possible_squares(){}
 
-    void move(pair<char,char> square){}
-
     friend ostream& operator<<(ostream& os, const Piece& piece){
-        os << piece.color << piece.toString();
+        os << piece.color << " " << piece.toString();
         return os;
     }
 };
