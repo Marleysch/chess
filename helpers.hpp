@@ -56,4 +56,16 @@ char number_to_letter(int number){
         return 'h';
 }
 
+void print_board(Piece* board[8][8]){
+    for (int i=0;i<8;i++){
+        for (int j=0;j<8;j++){
+            if (board[i][j] == nullptr)
+                cout << "hi";
+            else
+                cout << *board[i][j];
+        }
+        cout << endl;
+    }
+}
+
 #endif  
