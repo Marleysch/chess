@@ -5,11 +5,19 @@
             "label": "C/C++: cl.exe build active file",
             "command": "cl.exe",
             "args": [
+                "/I", "${workspaceFolder}/pieces",
+                "/I", "${workspaceFolder}",
                 "/Zi",
+                "/Fd${workspaceFolder}/build\\",
                 "/EHsc",
                 "/nologo",
-                "/Fe${fileDirname}\\${fileBasenameNoExtension}.exe",
-                "${file}"
+                "/Fo${workspaceFolder}/build\\",
+                "/Fe${workspaceFolder}/build\\myprogram.exe",
+                "${workspaceFolder}/main.cpp",
+                "${workspaceFolder}/helpers.cpp",
+                "${workspaceFolder}/pieces/piece.cpp",
+                "${workspaceFolder}/pieces/knight.cpp",
+                "${workspaceFolder}/pieces/bishop.cpp"
             ],
             "options": {
                 "cwd": "${fileDirname}"

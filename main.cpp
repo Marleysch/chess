@@ -4,7 +4,7 @@
 #include "piece.hpp"
 using namespace std;
 
-extern Piece* board[8][8];
+Piece* board[8][8];
 
 int main(){
 
@@ -17,7 +17,5 @@ int main(){
     }   
     board[0][1] = whiteknight1;
     print_board(board);
-
-
 
 };

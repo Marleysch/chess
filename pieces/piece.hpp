@@ -1,4 +1,5 @@
 #include <string>
+#include <iostream>
 #include <utility>
 #include <vector>
 #pragma once
@@ -10,17 +11,14 @@ class Piece{
     pair<char, int> curr_square;
     vector<pair<char,int>> possible_squares;
 
-    Piece(string incolor, char rank, int row) : color(incolor),curr_square({rank,row}){};
+    Piece(string incolor, char rank, int row);
 
     virtual string toString() const = 0;
 
-    virtual void move(pair<char,int> square){};
+    virtual void move(pair<char,int> square);
     
     protected:
-    void calc_possible_squares(){}
+    void calc_possible_squares();
 
-    friend ostream& operator<<(ostream& os, const Piece& piece){
-        os << piece.color << " " << piece.toString();
-        return os;
-    }
+    friend ostream& operator<<(ostream& os, const Piece& piece);
 };
