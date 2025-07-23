@@ -1,5 +1,4 @@
-#ifndef HELPERS_H
-#define HELPERS_H
+#pragma once
 #include <string>
 #include <vector>
 #include <iostream>
@@ -68,4 +67,3 @@ void print_board(Piece* board[8][8]){
     }
 }
 
-#endif  
