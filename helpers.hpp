@@ -13,5 +13,7 @@ int letter_to_number(char letter);
 
 char number_to_letter(int number);
 
-void print_board(Piece* board[8][8]);
+int the_maggie_function(int number);
+
+void print_board();
 

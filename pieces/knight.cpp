@@ -10,24 +10,20 @@ using namespace std;
     
     Knight::Knight(string incolor, char rank, int row) : Piece(incolor,rank,row){
         calc_possible_squares();
+        board[the_maggie_function(row)- 1][letter_to_number(rank) - 1] = this;
     };
 
     string Knight::toString() const{
-        return "Knight";
+        return "Kn";
     }
 
-    void Knight::move(pair<char, int> square){
-        int possible_squares_size = possible_squares.size(); 
-        if (check_membership(square, possible_squares, possible_squares_size)){
-            curr_square = square;
-            for (int i=0; i<possible_squares.size();i++)
-                possible_squares.pop_back();
-            calc_possible_squares();
-        }
-        else
-            cout << "you cant go there" << endl;
-    };
+    pair<char,int>& Knight::get_curr_square(){
+        return curr_square;
+    }
 
+    vector<pair<char,int>>& Knight::get_possible_squares(){
+        return possible_squares;
+    }
 
     void Knight::calc_possible_squares(){
         possible_squares.clear();
@@ -39,16 +35,16 @@ using namespace std;
             for (int j=0; j<4; j++){
                 if (i == 0){first=2;second=1;}else{first=1;second=2;}
                 if (j == 0)
-                    if (0 < square.first+first && square.first+first < 9 && 0 < square.second+second && square.second < 9)
+                    if (0 < square.first+first && square.first+first < 9 && 0 < square.second+second && square.second < 9 && board[square.second-1][square.first-1] == nullptr)
                         possible_squares.push_back({number_to_letter(square.first+first), square.second+second});
                 if (j == 1)
-                    if (0 < square.first+first && square.first+first < 9 && 0 < square.second-second && square.second-second < 9)
+                    if (0 < square.first+first && square.first+first < 9 && 0 < square.second-second && square.second-second < 9 && board[square.second-1][square.first-1] == nullptr)
                         possible_squares.push_back({number_to_letter(square.first+first), square.second-second});
                 if (j == 2)
-                    if (0 < square.first-first && square.first-first < 9 && 0 < square.second+second && square.second+second < 9)
+                    if (0 < square.first-first && square.first-first < 9 && 0 < square.second+second && square.second+second < 9 && board[square.second-1][square.first-1] == nullptr)
                         possible_squares.push_back({number_to_letter(square.first-first), square.second+second});
                 if (j == 3)
-                    if (0 < square.first-first && square.first-first < 9 && 0 < square.second-second && square.second-second < 9)
+                    if (0 < square.first-first && square.first-first < 9 && 0 < square.second-second && square.second-second < 9 && board[square.second-1][square.first-1] == nullptr)
                         possible_squares.push_back({number_to_letter(square.first-first), square.second-second});
             }
         }

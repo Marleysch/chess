@@ -1,10 +1,13 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <iomanip>
+#include <sstream>
 #include "piece.hpp"
 #include "helpers.hpp"
 using namespace std;
 
+Piece * board[8][8];
 
 bool check_membership(pair<char, int> item, vector<pair<char,int>> vector, int array_size){
     for (int i=0; i < array_size;i++){
@@ -53,15 +56,47 @@ char number_to_letter(int number){
         return 'h';
 }
 
-void print_board(Piece* board[8][8]){
+int the_maggie_function(int number){
+    if (number == 1)
+        return 8;
+    else if (number == 2)
+        return 7;
+    else if (number == 3)
+        return 6;
+    else if (number == 4)
+        return 5;
+    else if (number == 5)
+        return 4;
+    else if (number == 6)
+        return 3;
+    else if (number == 7)
+        return 2;
+    else
+        return 1;
+}
+
+void print_board(){
+    int y = 8;
     for (int i=0;i<8;i++){
+        cout << y << "  |";
         for (int j=0;j<8;j++){
             if (board[i][j] == nullptr)
-                cout << "hi";
-            else
-                cout << *board[i][j];
+                cout << left << setw(4) << "E";
+            else{
+                ostringstream oss;
+                oss << *board[i][j];
+                string squarestring = oss.str();
+                cout << left << setw(4) << squarestring;
+            }
         }
         cout << endl;
+        y -= 1;
     }
+    cout << "   -------------------------------" << endl;
+    cout << "    ";
+    for (int i = 1;i < 9; i++){
+        cout << left << setw(4) << number_to_letter(i);
+    }
+    cout << endl;
 }
 

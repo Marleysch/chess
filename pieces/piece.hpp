@@ -11,14 +11,20 @@ class Piece{
     pair<char, int> curr_square;
     vector<pair<char,int>> possible_squares;
 
+
     Piece(string incolor, char rank, int row);
+
+
+    virtual vector<pair<char,int>>& get_possible_squares() =0;
+    virtual pair<char,int>& get_curr_square() =0;
+
 
     virtual string toString() const = 0;
 
-    virtual void move(pair<char,int> square);
-    
-    protected:
-    void calc_possible_squares();
+    virtual void calc_possible_squares();
+
+    void move(pair<char,int> square);
+
 
     friend ostream& operator<<(ostream& os, const Piece& piece);
 };
