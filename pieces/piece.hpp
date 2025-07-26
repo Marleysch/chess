@@ -10,6 +10,7 @@ class Piece{
     string color;
     pair<char, int> curr_square;
     vector<pair<char,int>> possible_squares;
+    bool has_moved;
 
 
     Piece(string incolor, char rank, int row);

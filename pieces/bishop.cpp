@@ -10,10 +10,11 @@ using namespace std;
 
 Bishop::Bishop(string incolor, char rank, int row) : Piece(incolor,rank,row){
     calc_possible_squares();
+    board[the_maggie_function(row)- 1][letter_to_number(rank) - 1] = this;
 };
 
 string Bishop::toString() const{
-    return "B";
+    return "Bp";
 };
 
 pair<char,int>& Bishop::get_curr_square(){

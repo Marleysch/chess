@@ -15,5 +15,7 @@ char number_to_letter(int number);
 
 int the_maggie_function(int number);
 
+bool check_for_check(Piece * king);
+
 void print_board();
 

@@ -7,7 +7,9 @@
 using namespace std;
 
 
-Piece::Piece(string incolor, char rank, int row) : color(incolor),curr_square({rank,row}){};
+Piece::Piece(string incolor, char rank, int row) : color(incolor),curr_square({rank,row}){
+    has_moved = 0;
+};
 
 void Piece::move(pair<char, int> square){
     auto& curr_square_child = get_curr_square();
@@ -17,6 +19,7 @@ void Piece::move(pair<char, int> square){
     if (check_membership(square, possible_squares_child, possible_squares_size)){
         board[the_maggie_function(curr_square_child.second)-1][letter_to_number(curr_square_child.first)-1] = nullptr;
         curr_square_child = square;
+        has_moved = 1;
         board[the_maggie_function(square.second)-1][letter_to_number(square.first)-1] = this;
         calc_possible_squares();
     }

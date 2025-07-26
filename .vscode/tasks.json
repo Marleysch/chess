@@ -17,7 +17,9 @@
                 "${workspaceFolder}/helpers.cpp",
                 "${workspaceFolder}/pieces/piece.cpp",
                 "${workspaceFolder}/pieces/knight.cpp",
-                "${workspaceFolder}/pieces/bishop.cpp"
+                "${workspaceFolder}/pieces/bishop.cpp",
+                "${workspaceFolder}/pieces/rook.cpp",
+                "${workspaceFolder}/pieces/king.cpp",
             ],
             "options": {
                 "cwd": "${fileDirname}"

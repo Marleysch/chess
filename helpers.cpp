@@ -75,13 +75,28 @@ int the_maggie_function(int number){
         return 1;
 }
 
+bool check_for_check(Piece * king){
+    for (auto& row : board){
+        for(auto& space : row){
+            if (space != nullptr && space->color == "B"){
+                for (auto& possible_square : space->possible_squares){
+                    if (possible_square == king->curr_square){
+                        return 1;
+                    }
+                }
+            }
+        }
+    }
+    return 0;
+}
+
 void print_board(){
     int y = 8;
     for (int i=0;i<8;i++){
         cout << y << "  |";
         for (int j=0;j<8;j++){
             if (board[i][j] == nullptr)
-                cout << left << setw(4) << "E";
+                cout << left << setw(4) << "XXX";
             else{
                 ostringstream oss;
                 oss << *board[i][j];

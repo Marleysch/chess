@@ -2,55 +2,121 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <typeinfo>
 #include "piece.hpp"
 #include "helpers.hpp"
 #include "king.hpp"
+#include "rook.hpp"
 using namespace std;
 
 
 King::King(string incolor, char rank, int row) : Piece(incolor,rank,row){
+    in_check = 0;
     calc_possible_squares();
+    board[the_maggie_function(row)- 1][letter_to_number(rank) - 1] = this;
 };
 
 string King::toString() const{
-    return "King";
+    return "Kg";
 };
 
-void King::move(pair<char, int> square){
-    int possible_squares_size = possible_squares.size(); 
-    if (check_membership(square, possible_squares, possible_squares_size)){
-        curr_square = square;
-        calc_possible_squares();
-    }
-    else
-        cout << "you cant go there" << endl;
-};
+pair<char,int>& King::get_curr_square(){
+    return curr_square;
+}
 
+vector<pair<char,int>>& King::get_possible_squares(){
+    return possible_squares;
+}
 
 void King::calc_possible_squares(){
     possible_squares.clear();
+    pair<char,int> curr_square_holder = curr_square;
     pair<int,int> square = {letter_to_number(curr_square.first), curr_square.second};
 
-    for (int i=0; i<2; i++){
-        int first;
-        int second;
-        for (int j=0; j<4; j++){
-            if (i == 0){first=2;second=1;}else{first=1;second=2;}
-            if (j == 0)
-                if (0 < square.first+first && square.first+first < 9 && 0 < square.second+second && square.second < 9)
-                    possible_squares.push_back({number_to_letter(square.first+first), square.second+second});
-            if (j == 1)
-                if (0 < square.first+first && square.first+first < 9 && 0 < square.second-second && square.second-second < 9)
-                    possible_squares.push_back({number_to_letter(square.first+first), square.second-second});
-            if (j == 2)
-                if (0 < square.first-first && square.first-first < 9 && 0 < square.second+second && square.second+second < 9)
-                    possible_squares.push_back({number_to_letter(square.first-first), square.second+second});
-            if (j == 3)
-                if (0 < square.first-first && square.first-first < 9 && 0 < square.second-second && square.second-second < 9)
-                    possible_squares.push_back({number_to_letter(square.first-first), square.second-second});
+    if (!has_moved && !in_check){
+        square.first += 1;
+        while (square.first != 8){
+            if (board[square.second - 1][square.first - 1] != nullptr){
+                break;
+            }
+            square.first += 1;
+        }
+        if (Rook* r = dynamic_cast<Rook*>(board[square.second - 1][square.first - 1])){
+            if (!board[square.second - 1][square.first - 1]->has_moved){
+                curr_square = {number_to_letter(letter_to_number(curr_square.first) + 2),curr_square.second};
+                if (!check_for_check(this)){
+                    possible_squares.push_back(curr_square);
+                    curr_square = curr_square_holder;
+                }
+        
+            }
+        }
+
+        square = {letter_to_number(curr_square.first), curr_square.second};
+        square.first -= 1;
+        while (square.first != 1){
+            if (board[square.second - 1][square.first - 1] != nullptr){
+                break;
+            }
+            square.first -= 1;
+        }
+        if (Rook* r = dynamic_cast<Rook*>(board[square.second - 1][square.first - 1])){
+            if (!board[square.second - 1][square.first - 1]->has_moved){
+                curr_square = {number_to_letter(letter_to_number(curr_square.first) - 2),curr_square.second};
+                if (!check_for_check(this)){
+                    possible_squares.push_back(curr_square);
+                    curr_square = curr_square_holder;
+                }
+            }
         }
     }
-};
+
+    square = {letter_to_number(curr_square.first), curr_square.second};
+    curr_square.first = number_to_letter(letter_to_number(curr_square.first + 1));
+    if (board[square.second][square.first] == nullptr && !check_for_check(this)){
+        possible_squares.push_back(curr_square);
+        curr_square = curr_square_holder;
+    }
+    curr_square.first = number_to_letter(letter_to_number(curr_square.first - 1));
+    if (board[square.second][square.first - 2] == nullptr && !check_for_check(this)){
+        possible_squares.push_back(curr_square);
+        curr_square = curr_square_holder;
+    }
+    curr_square.second = number_to_letter(letter_to_number(curr_square.second + 1));
+    if (board[square.second][square.first] == nullptr && !check_for_check(this)){
+        possible_squares.push_back(curr_square);
+        curr_square = curr_square_holder;
+    }
+    curr_square.second = number_to_letter(letter_to_number(curr_square.second - 1));
+    if (board[square.second - 2][square.first] == nullptr && !check_for_check(this)){
+        possible_squares.push_back(curr_square);
+        curr_square = curr_square_holder;
+    }
+    curr_square.first = number_to_letter(letter_to_number(curr_square.first + 1));
+    curr_square.second = number_to_letter(letter_to_number(curr_square.second + 1));
+    if (board[square.second][square.first] == nullptr && !check_for_check(this)){
+        possible_squares.push_back(curr_square);
+        curr_square = curr_square_holder;
+    }
+    curr_square.first = number_to_letter(letter_to_number(curr_square.first + 1));
+    curr_square.second = number_to_letter(letter_to_number(curr_square.second - 1));
+    if (board[square.second - 2][square.first] == nullptr && !check_for_check(this)){
+        possible_squares.push_back(curr_square);
+        curr_square = curr_square_holder;
+    }
+    curr_square.first = number_to_letter(letter_to_number(curr_square.first - 1));
+    curr_square.second = number_to_letter(letter_to_number(curr_square.second + 1));
+    if (board[square.second][square.first - 2] == nullptr && !check_for_check(this)){
+        possible_squares.push_back(curr_square);
+        curr_square = curr_square_holder;
+    }
+    curr_square.first = number_to_letter(letter_to_number(curr_square.first - 1));
+    curr_square.second = number_to_letter(letter_to_number(curr_square.second - 1));
+    if (board[square.second - 2][square.first - 2] == nullptr && !check_for_check(this)){
+        possible_squares.push_back(curr_square);
+        curr_square = curr_square_holder;
+    }
+}
 
 
 
