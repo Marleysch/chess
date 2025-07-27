@@ -1,0 +1,2 @@
+move needs to calcpossiblesquares for all pieces and also check for check at the same time
+calcpossiblesquares needs to check for which color pieces
