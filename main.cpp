@@ -23,6 +23,7 @@ int main(){
     cout << "before:" << whiteknight1->has_moved << endl;
     print_board();
     whiteknight1->move({'d',2});
+    whitebishop1->move({'b',2});
     print_board();
     cout << "after:" << whiteknight1->has_moved << endl;
 

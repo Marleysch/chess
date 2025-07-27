@@ -78,7 +78,7 @@ int the_maggie_function(int number){
 bool check_for_check(Piece * king){
     for (auto& row : board){
         for(auto& space : row){
-            if (space != nullptr && space->color == "B"){
+            if (space != nullptr && space->color != king->color){
                 for (auto& possible_square : space->possible_squares){
                     if (possible_square == king->curr_square){
                         return 1;
