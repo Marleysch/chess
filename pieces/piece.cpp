@@ -19,30 +19,41 @@ void Piece::move(pair<char, int> square){
  
     int possible_squares_size = possible_squares_child.size(); 
     if (check_membership(square, possible_squares_child, possible_squares_size)){
-        board[the_maggie_function(curr_square_child.second)-1][letter_to_number(curr_square_child.first)-1] = nullptr;
-        if (dynamic_cast<King*>(this)){
-            if (abs(letter_to_number(curr_square_child.first) - letter_to_number(square.first)) > 1){
-                if (letter_to_number(square.first) > 5){
-                    Piece * temp_rook = board[the_maggie_function(square.second) - 1][7];
-                    board[the_maggie_function(square.second) - 1][7] = nullptr;
-                    board[the_maggie_function(square.second) - 1][letter_to_number(square.first) - 2] = temp_rook;
-                    temp_rook->curr_square = {number_to_letter(letter_to_number(square.first) - 1), square.second};
+        if (board[the_maggie_function(square.second) - 1][letter_to_number(square.first)] == nullptr){
+            board[the_maggie_function(curr_square_child.second)-1][letter_to_number(curr_square_child.first)-1] = nullptr;
+            if (dynamic_cast<King*>(this)){
+                if (abs(letter_to_number(curr_square_child.first) - letter_to_number(square.first)) > 1){
+                    if (letter_to_number(square.first) > 5){
+                        Piece * temp_rook = board[the_maggie_function(square.second) - 1][7];
+                        board[the_maggie_function(square.second) - 1][7] = nullptr;
+                        board[the_maggie_function(square.second) - 1][letter_to_number(square.first) - 2] = temp_rook;
+                        temp_rook->curr_square = {number_to_letter(letter_to_number(square.first) - 1), square.second};
+                    }
+                    else{
+                        Piece * temp_rook = board[the_maggie_function(square.second) - 1][0];
+                        board[the_maggie_function(square.second) - 1][0] = nullptr;
+                        board[the_maggie_function(square.second) - 1][letter_to_number(square.first)] = temp_rook;
+                        temp_rook->curr_square = {number_to_letter(letter_to_number(square.first) + 1), square.second};
+                    }
+                }
+            }
+            curr_square_child = square;
+            has_moved = 1;
+            board[the_maggie_function(square.second)-1][letter_to_number(square.first)-1] = this;
+            for (auto& row : board){
+                for(auto& space : row){
+                    if (space != nullptr){
+                        space->calc_possible_squares();
+                    }
+                    if (King * k = dynamic_cast<King*>(space)){
+                        k->in_check = check_for_check(space);
+                    }
                 }
             }
         }
-        curr_square_child = square;
-        has_moved = 1;
-        board[the_maggie_function(square.second)-1][letter_to_number(square.first)-1] = this;
-        for (auto& row : board){
-            for(auto& space : row){
-                if (space != nullptr){
-                    space->calc_possible_squares();
-                }
-                if (King * k = dynamic_cast<King*>(space)){
-                    k->in_check = check_for_check(space);
-                }
-            }
-        }
+        else{
+            //IF TAKING A PIECE
+        }    
     }  
     
     else

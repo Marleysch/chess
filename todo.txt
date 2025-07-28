@@ -1,2 +1,2 @@
-move needs to calcpossiblesquares for all pieces and also check for check at the same time
+add section to move for taking a piece
 calcpossiblesquares needs to check for which color pieces

@@ -57,7 +57,13 @@ char number_to_letter(int number){
 }
 
 int the_maggie_function(int number){
-    if (number == 1)
+    if (number > 8){
+        return -10;
+    }
+    else if(number < 1){
+        return 10;
+    }
+    else if (number == 1)
         return 8;
     else if (number == 2)
         return 7;
@@ -73,6 +79,7 @@ int the_maggie_function(int number){
         return 2;
     else
         return 1;
+
 }
 
 bool check_for_check(Piece * king){

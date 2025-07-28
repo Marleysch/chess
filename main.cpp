@@ -32,7 +32,10 @@ int main(){
     cout << "before:" << whiteknight1->has_moved << endl;
     print_board();
     whiteknight1->move({'d',2});
-    // whitebishop1->move({'b',2});
+    print_board();
+    whitebishop1->move({'b',2});
+    print_board();
+    whiteking->move({'c',1});
     print_board();
     cout << "king space: " << whiteking->curr_square.first << whiteking->curr_square.second << endl;
     cout << "after:" << whiteknight1->has_moved << endl;
