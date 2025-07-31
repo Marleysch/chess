@@ -11,16 +11,13 @@ using namespace std;
 
 
 int main(){
-    cout << "running" << endl << endl;
+    cout << "running main" << endl << endl;
 
     for (int i=0;i<8;i++){
         for (int j=0;j<8;j++){
             board[i][j] = nullptr;
         };
     }   
-    
-    print_board();
-
 
     board[7][0] = new Rook("W", 'a', 1);
     board[7][1] = new Knight("W", 'b', 1);
@@ -45,11 +42,16 @@ int main(){
         board[the_maggie_function(7) - 1][i] = new Pawn("B", number_to_letter(i), 7);
     }
 
+
     //calc possible squares for all pieces
     for (auto& row : board){
         for (auto& piece : row){
             if (piece != nullptr){
+                print_board();
+                cout << "made it to " << *piece << endl;
                 piece->calc_possible_squares();
+                cout << "finished " << *piece << endl << endl;
+
             }
         }
     }

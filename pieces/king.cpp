@@ -10,7 +10,9 @@
 using namespace std;
 
 
-King::King(string incolor, char rank, int row) : Piece(incolor,rank,row){};
+King::King(string incolor, char rank, int row) : Piece(incolor,rank,row){
+    in_check = 0;
+};
 
 string King::toString() const{
     return "Kg";
@@ -26,7 +28,6 @@ vector<pair<char,int>>& King::get_possible_squares(){
 
 void King::calc_possible_squares(){
     possible_squares.clear();
-    cout << curr_square.first << curr_square.second << endl;
     pair<char,int> curr_square_holder = curr_square;
     pair<int,int> num_square = {letter_to_number(curr_square.first), the_maggie_function(curr_square.second)};
 
@@ -53,6 +54,7 @@ void King::calc_possible_squares(){
             }
         }   
 
+
         num_square = {letter_to_number(curr_square.first), the_maggie_function(curr_square.second)};
         num_square.first -= 1;
         while (num_square.first != 1){
@@ -76,6 +78,7 @@ void King::calc_possible_squares(){
             }
         }
     }
+            cout <<"castling checked" << endl;
 
     curr_square.first = number_to_letter(letter_to_number(curr_square.first + 1));
     num_square = {letter_to_number(curr_square.first), the_maggie_function(curr_square.second)};
@@ -84,12 +87,16 @@ void King::calc_possible_squares(){
     }
     curr_square = curr_square_holder;
 
+    cout << "checked first+1" << endl;
+
     curr_square.first = number_to_letter(letter_to_number(curr_square.first - 1));
     num_square = {letter_to_number(curr_square.first), the_maggie_function(curr_square.second)};
     if ((board[num_square.second - 1][num_square.first - 1] == nullptr || board[num_square.second - 1][num_square.first - 1]->color != color) && !check_for_check(this) && num_square.first > 0){
         possible_squares.push_back(curr_square);
     }
     curr_square = curr_square_holder;
+
+    cout << "checked first+1" << endl;
 
     curr_square.second = curr_square.second + 1;
     num_square = {letter_to_number(curr_square.first), the_maggie_function(curr_square.second)};
@@ -98,12 +105,16 @@ void King::calc_possible_squares(){
     }
     curr_square = curr_square_holder;
 
+    cout << "checked first+1" << endl;
+
     curr_square.second = curr_square.second - 1;
     num_square = {letter_to_number(curr_square.first), the_maggie_function(curr_square.second)};
     if ((board[num_square.second - 1][num_square.first - 1] == nullptr || board[num_square.second - 1][num_square.first - 1]->color != color) && !check_for_check(this) && num_square.second < 9){
         possible_squares.push_back(curr_square);
     }
     curr_square = curr_square_holder;
+
+    cout << "checked first+1" << endl;
 
     curr_square.first = number_to_letter(letter_to_number(curr_square.first + 1));
     curr_square.second = curr_square.second + 1;
@@ -113,6 +124,8 @@ void King::calc_possible_squares(){
     }
     curr_square = curr_square_holder;
 
+    cout << "checked first+1" << endl;
+
     curr_square.first = number_to_letter(letter_to_number(curr_square.first + 1));
     curr_square.second = curr_square.second - 1;
     num_square = {letter_to_number(curr_square.first), the_maggie_function(curr_square.second)};
@@ -121,6 +134,8 @@ void King::calc_possible_squares(){
     }
     curr_square = curr_square_holder;
 
+    cout << "checked first+1" << endl;
+
     curr_square.first = number_to_letter(letter_to_number(curr_square.first - 1));
     curr_square.second = curr_square.second + 1;
     num_square = {letter_to_number(curr_square.first), the_maggie_function(curr_square.second)};
@@ -128,6 +143,8 @@ void King::calc_possible_squares(){
         possible_squares.push_back(curr_square);
     }
     curr_square = curr_square_holder;
+
+    cout << "checked first+1" << endl;
 
     curr_square.first = number_to_letter(letter_to_number(curr_square.first - 1));
     curr_square.second = curr_square.second - 1;
