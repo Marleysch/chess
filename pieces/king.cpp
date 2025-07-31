@@ -10,11 +10,7 @@
 using namespace std;
 
 
-King::King(string incolor, char rank, int row) : Piece(incolor,rank,row){
-    in_check = 0;
-    calc_possible_squares();
-    board[the_maggie_function(row)- 1][letter_to_number(rank) - 1] = this;
-};
+King::King(string incolor, char rank, int row) : Piece(incolor,rank,row){};
 
 string King::toString() const{
     return "Kg";

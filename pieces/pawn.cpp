@@ -7,10 +7,7 @@
 #include "pawn.hpp"
 using namespace std;
 
-Pawn::Pawn(string incolor, char rank, int row) : Piece(incolor,rank,row){
-    calc_possible_squares();
-    board[the_maggie_function(row)- 1][letter_to_number(rank) - 1] = this;
-};
+Pawn::Pawn(string incolor, char rank, int row) : Piece(incolor,rank,row){};
 
 string Pawn::toString() const{
     return "Pn";

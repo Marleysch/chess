@@ -8,10 +8,7 @@
 #include "queen.hpp"
 using namespace std;
 
-Queen::Queen(string incolor, char rank, int row) : Piece(incolor,rank,row){
-    calc_possible_squares();
-    board[the_maggie_function(row)- 1][letter_to_number(rank) - 1] = this;
-};
+Queen::Queen(string incolor, char rank, int row) : Piece(incolor,rank,row){};
 
 string Queen::toString() const{
     return "Qn";

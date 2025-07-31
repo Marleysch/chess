@@ -1,5 +1,6 @@
 game loop
     -pawn can transfrom at end
+    -remove en passant as possible move if it is not taken right away
 add en passant to move
-test taking a piece
-oppposite king needs to be checked for check after a move
+
+
