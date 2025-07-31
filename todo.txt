@@ -2,3 +2,4 @@ game loop
     -pawn can transfrom at end
 add en passant to move
 test taking a piece
+oppposite king needs to be checked for check after a move

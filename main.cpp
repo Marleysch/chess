@@ -21,24 +21,32 @@ int main(){
     
     print_board();
 
+    //only have pointers in the board itself dont use these
     Piece * whiterook1 = new Rook("W", 'a', 1);
     Piece * whiteknight1 = new Knight("W", 'b', 1);
     Piece * whitebishop1 = new Bishop("W", 'c', 1);
     Piece * whiteking = new King("W", 'e', 1);
     Piece * whitequeen = new Queen("W", 'd', 1);
-    Piece * whitepawn = new Pawn("W", 'g', 2);
-    Piece * blackknight = new Knight("B", 'h', 3);
-    Piece * blackpawn = new Pawn("B", 'g', 7);
-    Piece * whiteknight = new Knight("W", 'h', 6);
+    Piece * whitebishop2 = new Bishop("W", 'f', 1);
+    Piece * whiteknight2 = new Knight("W", 'g', 1);
+    Piece * whiterook2 = new Rook("W", 'h', 1);
+    for (int i = 0; i < 8; i++){
+        board[the_maggie_function(2) - 1][i] = new Pawn("W", number_to_letter(i), 2);
+    }
+    Piece * blackrook1 = new Rook("B", 'a', 8);
+    // Piece * blackknight1 = new Knight("B", 'b', 8);
+    Piece * blackbishop1 = new Bishop("B", 'c', 8);
+    Piece * blackking = new King("B", 'e', 8);
+    Piece * blackqueen = new Queen("B", 'd', 8);
+    Piece * blackbishop2 = new Bishop("B", 'f', 8);
+    Piece * blackknight2 = new Knight("B", 'g', 8);
+    Piece * blackrook2 = new Rook("B", 'h', 8);
+    for (int i = 0; i < 8; i++){
+        board[the_maggie_function(7) - 1][i] = new Pawn("B", number_to_letter(i), 7);
+    }
 
-    print_board();
-    whiteknight1->move({'d',2});
-    print_board();
-    whitebishop1->move({'b',2});
-    print_board();
-    whiteking->move({'c',1});
-    print_board();
-    blackpawn->move({'h',6});
+
+
     print_board();
 
     cout << "knigth possible squares:  {";
@@ -65,22 +73,8 @@ int main(){
     }
     cout << "}" << endl;
 
-    print_board();
-
     cout << "queen possible squares:  {";
     for (const auto& square : whitequeen->possible_squares){
-        cout << square.first << square.second << ", ";
-    }
-    cout << "}" << endl;
-
-    cout << " white pawn possible squares:  {";
-    for (const auto& square : whitepawn->possible_squares){
-        cout << square.first << square.second << ", ";
-    }
-    cout << "}" << endl;
-
-    cout << "black pawn possible squares:  {";
-    for (const auto& square : blackpawn->possible_squares){
         cout << square.first << square.second << ", ";
     }
     cout << "}" << endl;
