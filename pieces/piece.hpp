@@ -26,6 +26,8 @@ class Piece{
 
     void move(pair<char,int> square);
 
+    virtual ~Piece() {};
+
 
     friend ostream& operator<<(ostream& os, const Piece& piece);
 };

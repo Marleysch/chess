@@ -20,6 +20,8 @@
                 "${workspaceFolder}/pieces/bishop.cpp",
                 "${workspaceFolder}/pieces/rook.cpp",
                 "${workspaceFolder}/pieces/king.cpp",
+                "${workspaceFolder}/pieces/queen.cpp",
+                "${workspaceFolder}/pieces/pawn.cpp",
             ],
             "options": {
                 "cwd": "${fileDirname}"

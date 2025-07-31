@@ -5,6 +5,8 @@
 #include "rook.hpp"
 #include "king.hpp"
 #include "bishop.hpp"
+#include "queen.hpp"
+#include "pawn.hpp"
 using namespace std;
 
 //DONT FORGET TO CHECK FOR CHECK
@@ -23,13 +25,12 @@ int main(){
     Piece * whiteknight1 = new Knight("W", 'b', 1);
     Piece * whitebishop1 = new Bishop("W", 'c', 1);
     Piece * whiteking = new King("W", 'e', 1);
-    cout << "king possible squares:  {";
-    for (const auto& square : whiteking->possible_squares){
-        cout << square.first << square.second << ", ";
-    }
-    cout << "}" << endl;
-    cout << "king space: " << whiteking->curr_square.first << whiteking->curr_square.second << endl;
-    cout << "before:" << whiteknight1->has_moved << endl;
+    Piece * whitequeen = new Queen("W", 'd', 1);
+    Piece * whitepawn = new Pawn("W", 'g', 2);
+    Piece * blackknight = new Knight("B", 'h', 3);
+    Piece * blackpawn = new Pawn("B", 'g', 7);
+    Piece * whiteknight = new Knight("W", 'h', 6);
+
     print_board();
     whiteknight1->move({'d',2});
     print_board();
@@ -37,8 +38,8 @@ int main(){
     print_board();
     whiteking->move({'c',1});
     print_board();
-    cout << "king space: " << whiteking->curr_square.first << whiteking->curr_square.second << endl;
-    cout << "after:" << whiteknight1->has_moved << endl;
+    blackpawn->move({'h',6});
+    print_board();
 
     cout << "knigth possible squares:  {";
     for (const auto& square : whiteknight1->possible_squares){
@@ -60,6 +61,26 @@ int main(){
 
     cout << "king possible squares:  {";
     for (const auto& square : whiteking->possible_squares){
+        cout << square.first << square.second << ", ";
+    }
+    cout << "}" << endl;
+
+    print_board();
+
+    cout << "queen possible squares:  {";
+    for (const auto& square : whitequeen->possible_squares){
+        cout << square.first << square.second << ", ";
+    }
+    cout << "}" << endl;
+
+    cout << " white pawn possible squares:  {";
+    for (const auto& square : whitepawn->possible_squares){
+        cout << square.first << square.second << ", ";
+    }
+    cout << "}" << endl;
+
+    cout << "black pawn possible squares:  {";
+    for (const auto& square : blackpawn->possible_squares){
         cout << square.first << square.second << ", ";
     }
     cout << "}" << endl;

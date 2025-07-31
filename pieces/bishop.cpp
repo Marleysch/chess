@@ -36,6 +36,10 @@ void Bishop::calc_possible_squares(){
         if (board[(num_square_temp_array.second) - 1][num_square_temp_array.first - 1] == nullptr){
             possible_squares.push_back({number_to_letter(num_square_temp.first),num_square_temp.second});
         }
+        else if (board[(num_square_temp_array.second) - 1][num_square_temp_array.first - 1]->color != color){
+            possible_squares.push_back({number_to_letter(num_square_temp.first),num_square_temp.second});
+            break;
+        }
         else{
             break;
         }
@@ -50,6 +54,10 @@ void Bishop::calc_possible_squares(){
     while (num_square_temp.first < 9 && num_square_temp.second > 0){
         if (board[(num_square_temp_array.second) - 1][num_square_temp_array.first - 1] == nullptr){
             possible_squares.push_back({number_to_letter(num_square_temp.first),num_square_temp.second});
+        }
+        else if (board[(num_square_temp_array.second) - 1][num_square_temp_array.first - 1]->color != color){
+            possible_squares.push_back({number_to_letter(num_square_temp.first),num_square_temp.second});
+            break;
         }
         else{
             break;
@@ -66,6 +74,10 @@ void Bishop::calc_possible_squares(){
         if (board[(num_square_temp_array.second) - 1][num_square_temp_array.first - 1] == nullptr){
             possible_squares.push_back({number_to_letter(num_square_temp.first),num_square_temp.second});
         }
+        else if (board[(num_square_temp_array.second) - 1][num_square_temp_array.first - 1]->color != color){
+            possible_squares.push_back({number_to_letter(num_square_temp.first),num_square_temp.second});
+            break;
+        }
         else{
             break;
         }
@@ -80,6 +92,10 @@ void Bishop::calc_possible_squares(){
     while (num_square_temp.first > 0 && num_square_temp.second > 0){
         if (board[(num_square_temp_array.second) - 1][num_square_temp_array.first - 1] == nullptr){
             possible_squares.push_back({number_to_letter(num_square_temp.first),num_square_temp.second});
+        }
+        else if (board[(num_square_temp_array.second) - 1][num_square_temp_array.first - 1]->color != color){
+            possible_squares.push_back({number_to_letter(num_square_temp.first),num_square_temp.second});
+            break;
         }
         else{
             break;

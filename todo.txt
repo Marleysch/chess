@@ -1,2 +1,4 @@
-add section to move for taking a piece
-calcpossiblesquares needs to check for which color pieces
+game loop
+    -pawn can transfrom at end
+add en passant to move
+test taking a piece
