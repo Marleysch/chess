@@ -47,11 +47,12 @@ int main(){
     for (auto& row : board){
         for (auto& piece : row){
             if (piece != nullptr){
-                print_board();
-                cout << "made it to " << *piece << endl;
                 piece->calc_possible_squares();
-                cout << "finished " << *piece << endl << endl;
-
+                cout << *piece << "possible squares: {";
+                for (auto& square : piece->possible_squares){
+                    cout << square.first << square.second << ", ";
+                }
+                cout << "}" << endl;
             }
         }
     }

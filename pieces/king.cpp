@@ -78,8 +78,8 @@ void King::calc_possible_squares(){
             }
         }
     }
-            cout <<"castling checked" << endl;
 
+    //E
     curr_square.first = number_to_letter(letter_to_number(curr_square.first + 1));
     num_square = {letter_to_number(curr_square.first), the_maggie_function(curr_square.second)};
     if ((board[num_square.second - 1][num_square.first - 1] == nullptr || board[num_square.second - 1][num_square.first - 1]->color != color) && !check_for_check(this) && num_square.first < 9){
@@ -87,8 +87,7 @@ void King::calc_possible_squares(){
     }
     curr_square = curr_square_holder;
 
-    cout << "checked first+1" << endl;
-
+    //W
     curr_square.first = number_to_letter(letter_to_number(curr_square.first - 1));
     num_square = {letter_to_number(curr_square.first), the_maggie_function(curr_square.second)};
     if ((board[num_square.second - 1][num_square.first - 1] == nullptr || board[num_square.second - 1][num_square.first - 1]->color != color) && !check_for_check(this) && num_square.first > 0){
@@ -96,60 +95,54 @@ void King::calc_possible_squares(){
     }
     curr_square = curr_square_holder;
 
-    cout << "checked first+1" << endl;
-
+    //N
     curr_square.second = curr_square.second + 1;
     num_square = {letter_to_number(curr_square.first), the_maggie_function(curr_square.second)};
-    if ((board[num_square.second - 1][num_square.first - 1] == nullptr || board[num_square.second - 1][num_square.first - 1]->color != color) && !check_for_check(this) && num_square.second > 0){
+    if (num_square.second > 0 && (board[num_square.second - 1][num_square.first - 1] == nullptr || board[num_square.second - 1][num_square.first - 1]->color != color) && !check_for_check(this)){
         possible_squares.push_back(curr_square);
     }
     curr_square = curr_square_holder;
 
-    cout << "checked first+1" << endl;
-
+    //S
     curr_square.second = curr_square.second - 1;
     num_square = {letter_to_number(curr_square.first), the_maggie_function(curr_square.second)};
-    if ((board[num_square.second - 1][num_square.first - 1] == nullptr || board[num_square.second - 1][num_square.first - 1]->color != color) && !check_for_check(this) && num_square.second < 9){
+    if (num_square.second < 9 && (board[num_square.second - 1][num_square.first - 1] == nullptr || board[num_square.second - 1][num_square.first - 1]->color != color) && !check_for_check(this)){
         possible_squares.push_back(curr_square);
     }
     curr_square = curr_square_holder;
 
-    cout << "checked first+1" << endl;
-
+    //NE
     curr_square.first = number_to_letter(letter_to_number(curr_square.first + 1));
     curr_square.second = curr_square.second + 1;
     num_square = {letter_to_number(curr_square.first), the_maggie_function(curr_square.second)};
-    if ((board[num_square.second - 1][num_square.first - 1] == nullptr || board[num_square.second - 1][num_square.first - 1]->color != color) && !check_for_check(this) && num_square.first < 9 && num_square.second > 0){
+    if (num_square.first < 9 && num_square.second > 0 && (board[num_square.second - 1][num_square.first - 1] == nullptr || board[num_square.second - 1][num_square.first - 1]->color != color) && !check_for_check(this)){
         possible_squares.push_back(curr_square);
     }
     curr_square = curr_square_holder;
 
-    cout << "checked first+1" << endl;
-
+    //SE
     curr_square.first = number_to_letter(letter_to_number(curr_square.first + 1));
     curr_square.second = curr_square.second - 1;
     num_square = {letter_to_number(curr_square.first), the_maggie_function(curr_square.second)};
-    if ((board[num_square.second - 1][num_square.first - 1] == nullptr || board[num_square.second - 1][num_square.first - 1]->color != color) && !check_for_check(this) && num_square.first < 9 && num_square.second < 9){
+    if (num_square.first < 9 && num_square.second < 9 && (board[num_square.second - 1][num_square.first - 1] == nullptr || board[num_square.second - 1][num_square.first - 1]->color != color) && !check_for_check(this)){
         possible_squares.push_back(curr_square);
     }
     curr_square = curr_square_holder;
 
-    cout << "checked first+1" << endl;
-
+    //NW
     curr_square.first = number_to_letter(letter_to_number(curr_square.first - 1));
     curr_square.second = curr_square.second + 1;
     num_square = {letter_to_number(curr_square.first), the_maggie_function(curr_square.second)};
-    if ((board[num_square.second - 1][num_square.first - 1] == nullptr || board[num_square.second - 1][num_square.first - 1]->color != color) && !check_for_check(this) && num_square.first > 0 && num_square.second > 0){
+    if (num_square.first > 0 && num_square.second > 0 && (board[num_square.second - 1][num_square.first - 1] == nullptr || board[num_square.second - 1][num_square.first - 1]->color != color) && !check_for_check(this)){
         possible_squares.push_back(curr_square);
     }
     curr_square = curr_square_holder;
 
-    cout << "checked first+1" << endl;
-
+    //SW
     curr_square.first = number_to_letter(letter_to_number(curr_square.first - 1));
     curr_square.second = curr_square.second - 1;
     num_square = {letter_to_number(curr_square.first), the_maggie_function(curr_square.second)};
-    if ((board[num_square.second - 1][num_square.first - 1] == nullptr || board[num_square.second - 1][num_square.first - 1]->color != color) && !check_for_check(this) && num_square.first > 0 && num_square.second < 9){
+    if (num_square.first > 0 && num_square.second < 9 && (board[num_square.second - 1][num_square.first - 1] == nullptr || board[num_square.second - 1][num_square.first - 1]->color != color) && !check_for_check(this)){
         possible_squares.push_back(curr_square);
     }
     curr_square = curr_square_holder;
