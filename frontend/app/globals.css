@@ -40,3 +40,19 @@ a {
     color-scheme: dark;
   }
 }
+
+.square-button {
+  width: 100px;
+  height: 100px;
+  background-color: #4f46e5; /* Indigo */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.square-button:hover {
+  background-color: #4338ca; /* Darker indigo */
+}
