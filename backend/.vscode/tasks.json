@@ -8,9 +8,13 @@
                 "/I", "${workspaceFolder}/pieces",
                 "/I", "${workspaceFolder}",
                 "/I", "C:/Users/marle/vcpkg/installed/x64-windows/include",
+                "/D", "_WIN32_WINNT=0x0A00",
+                "/utf-8",
                 "/Zi",
                 "/Fd${workspaceFolder}/build\\",
                 "/EHsc",
+                "/std:c++17",
+                // "/link", "ws2_32.lib",
                 "/nologo",
                 "/Fo${workspaceFolder}/build\\",
                 "/Fe${workspaceFolder}/build\\myprogram.exe",
@@ -22,7 +26,7 @@
                 "${workspaceFolder}/pieces/rook.cpp",
                 "${workspaceFolder}/pieces/king.cpp",
                 "${workspaceFolder}/pieces/queen.cpp",
-                "${workspaceFolder}/pieces/pawn.cpp",
+                "${workspaceFolder}/pieces/pawn.cpp"
             ],
             "options": {
                 "cwd": "${fileDirname}"
