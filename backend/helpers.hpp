@@ -19,3 +19,5 @@ bool check_for_check(Piece * king);
 
 void print_board();
 
+void initialize_game();
+

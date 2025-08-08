@@ -80,19 +80,14 @@ void Queen::calc_possible_squares(){
     num_square_temp = {num_square.first, num_square.second - 1};
     num_square_temp_array = {num_square.first, the_maggie_function(num_square.second - 1)};
     while (num_square_temp.second > 0){
-        cout << "testing " << num_square_temp.first << num_square_temp.second << endl;
         if (board[num_square_temp_array.second - 1][num_square_temp_array.first - 1] == nullptr){
             possible_squares.push_back({number_to_letter(num_square_temp.first),num_square_temp.second});
-            cout << "option 1" << endl;
         }
         else if (board[num_square_temp_array.second - 1][num_square_temp_array.first - 1]->color != color){
             possible_squares.push_back({number_to_letter(num_square_temp.first),num_square_temp.second});
-            cout << "option 2" << endl;
             break;
         }
         else{
-            cout << "option 3" << endl;
-            cout << "piece at above space: " << *board[num_square_temp_array.second - 1][num_square_temp_array.first - 1] << endl;
             break;
         }
         num_square_temp.second -= 1;
