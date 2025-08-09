@@ -135,27 +135,27 @@ void initialize_game(){
         };
     }   
 
-    board[7][0] = new Rook("W", 'a', 1);
-    board[7][1] = new Knight("W", 'b', 1);
-    board[7][2] = new Bishop("W", 'c', 1);
-    board[7][3] = new King("W", 'e', 1);
-    board[7][4] = new Queen("W", 'd', 1);
-    board[7][5] = new Bishop("W", 'f', 1);
-    board[7][6] = new Knight("W", 'g', 1);
-    board[7][7] = new Rook("W", 'h', 1);
+    board[7][0] = new Rook("white ", 'a', 1);
+    board[7][1] = new Knight("white ", 'b', 1);
+    board[7][2] = new Bishop("white ", 'c', 1);
+    board[7][3] = new King("white  ", 'e', 1);
+    board[7][4] = new Queen("white ", 'd', 1);
+    board[7][5] = new Bishop("white ", 'f', 1);
+    board[7][6] = new Knight("white ", 'g', 1);
+    board[7][7] = new Rook("white ", 'h', 1);
     for (int i = 0; i < 8; i++){
-        board[the_maggie_function(2) - 1][i] = new Pawn("W", number_to_letter(i), 2);
+        board[the_maggie_function(2) - 1][i] = new Pawn("white " , number_to_letter(i), 2);
     }
-    board[0][0] = new Rook("B", 'a', 8);
-    board[0][1] = new Knight("B", 'b', 8);
-    board[0][2] = new Bishop("B", 'c', 8);
-    board[0][3] = new King("B", 'e', 8);
-    board[0][4] = new Queen("B", 'd', 8);
-    board[0][5] = new Bishop("B", 'f', 8);
-    board[0][6] = new Knight("B", 'g', 8);
-    board[0][7] = new Rook("B", 'h', 8);
+    board[0][0] = new Rook("black ", 'a', 8);
+    board[0][1] = new Knight("black ", 'b', 8);
+    board[0][2] = new Bishop("black ", 'c', 8);
+    board[0][3] = new King("black ", 'e', 8);
+    board[0][4] = new Queen("black ", 'd', 8);
+    board[0][5] = new Bishop("black ", 'f', 8);
+    board[0][6] = new Knight("black ", 'g', 8);
+    board[0][7] = new Rook("black ", 'h', 8);
     for (int i = 0; i < 8; i++){
-        board[the_maggie_function(7) - 1][i] = new Pawn("B", number_to_letter(i), 7);
+        board[the_maggie_function(7) - 1][i] = new Pawn("black ", number_to_letter(i), 7);
     }
 
 

@@ -15,7 +15,7 @@ King::King(string incolor, char rank, int row) : Piece(incolor,rank,row){
 };
 
 string King::toString() const{
-    return "Kg";
+    return "king";
 };
 
 pair<char,int>& King::get_curr_square(){

@@ -11,7 +11,7 @@ using namespace std;
 Bishop::Bishop(string incolor, char rank, int row) : Piece(incolor,rank,row){};
 
 string Bishop::toString() const{
-    return "Bp";
+    return "bishop";
 };
 
 pair<char,int>& Bishop::get_curr_square(){

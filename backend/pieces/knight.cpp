@@ -11,7 +11,7 @@ using namespace std;
 Knight::Knight(string incolor, char rank, int row) : Piece(incolor,rank,row){};
 
 string Knight::toString() const{
-    return "Kn";
+    return "knight";
 }
 
 pair<char,int>& Knight::get_curr_square(){

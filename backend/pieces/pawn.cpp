@@ -10,7 +10,7 @@ using namespace std;
 Pawn::Pawn(string incolor, char rank, int row) : Piece(incolor,rank,row){};
 
 string Pawn::toString() const{
-    return "Pn";
+    return "pawn";
 }
 
 pair<char,int>& Pawn::get_curr_square(){

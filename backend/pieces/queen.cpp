@@ -11,7 +11,7 @@ using namespace std;
 Queen::Queen(string incolor, char rank, int row) : Piece(incolor,rank,row){};
 
 string Queen::toString() const{
-    return "Qn";
+    return "queen";
 }
 
 pair<char,int>& Queen::get_curr_square(){

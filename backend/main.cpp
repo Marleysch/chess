@@ -8,20 +8,39 @@
 #include "queen.hpp"
 #include "pawn.hpp"
 #include "crow.h"
+#include "corshandler.hpp"
 using namespace std;
 
 
 int main(){
     cout << "running main" << endl << endl;
 
-    crow::SimpleApp app;
+    crow::App<CORSHandler> app;
 
     initialize_game();
 
-    // board[0][0]->move(pair<char, int> {'a', 1>});
+    //build json client board
+    crow::json::wvalue client_board = crow::json::wvalue::list();
+    for (int i = 0; i< 8; i++){
+        crow::json::wvalue row = crow::json::wvalue::list();
+        for (int j = 0; j < 8; j++){
+            if (board[i][j] == nullptr){
+                row[row.size()] = "Empty";
+            }
+            else{
+            ostringstream os;
+            os << *board[i][j];
+            row[row.size()] = os.str();
+            }
+        }
+        client_board[client_board.size()] = move(row);
+    }
 
-    // CROW_ROUTE(app, )
+    CROW_ROUTE(app, "/board")([client_board](){
 
-    print_board();
+        return client_board;
+    });
+
+    app.port(18080).multithreaded().run();
 
 };

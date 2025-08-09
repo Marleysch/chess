@@ -12,7 +12,7 @@ Rook::Rook(string incolor, char rank, int row) : Piece(incolor,rank,row){
 };
 
 string Rook::toString() const{
-    return "Rk";
+    return "rook";
 }
 
 pair<char,int>& Rook::get_curr_square(){
