@@ -107,7 +107,9 @@ body {
   background-color: #4338ca; /* Darker indigo */
 }
 
-.chess-piece{
-  width: 60px;
-  height: 60px;
+.chess-piece {
+  width: 90%;      /* or 100% if you want it flush */
+  height: 90%;
+  object-fit: contain; /* keeps aspect ratio */
+  pointer-events: none; /* so clicks hit the button, not the image */
 }

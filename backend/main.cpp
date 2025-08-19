@@ -19,26 +19,17 @@ int main(){
 
     initialize_game();
 
-    //build json client board
-    crow::json::wvalue client_board = crow::json::wvalue::list();
-    for (int i = 0; i< 8; i++){
-        crow::json::wvalue row = crow::json::wvalue::list();
-        for (int j = 0; j < 8; j++){
-            if (board[i][j] == nullptr){
-                row[row.size()] = "Empty";
-            }
-            else{
-            ostringstream os;
-            os << *board[i][j];
-            row[row.size()] = os.str();
-            }
-        }
-        client_board[client_board.size()] = move(row);
-    }
+    CROW_ROUTE(app, "/board")([](){
 
-    CROW_ROUTE(app, "/board")([client_board](){
+        return build_client_board();
+    });
 
-        return client_board;
+    CROW_ROUTE(app, "/<int>/<int>/<int>/<int>")([](int p1rank, int p1row, int p2rank, int p2row){
+
+        board[p1row][p1rank]->move({number_to_letter(p2rank + 1), the_maggie_function(p2row + 1)});
+
+        return build_client_board();
+
     });
 
     app.port(18080).multithreaded().run();

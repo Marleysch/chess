@@ -138,7 +138,7 @@ void initialize_game(){
     board[7][0] = new Rook("white ", 'a', 1);
     board[7][1] = new Knight("white ", 'b', 1);
     board[7][2] = new Bishop("white ", 'c', 1);
-    board[7][3] = new King("white  ", 'e', 1);
+    board[7][3] = new King("white ", 'e', 1);
     board[7][4] = new Queen("white ", 'd', 1);
     board[7][5] = new Bishop("white ", 'f', 1);
     board[7][6] = new Knight("white ", 'g', 1);
@@ -167,4 +167,23 @@ void initialize_game(){
             }
         }
     }
+}
+
+crow::json::wvalue build_client_board(){
+    crow::json::wvalue client_board = crow::json::wvalue::list();
+    for (int i = 0; i< 8; i++){
+        crow::json::wvalue row = crow::json::wvalue::list();
+        for (int j = 0; j < 8; j++){
+            if (board[i][j] == nullptr){
+                row[row.size()] = "Empty";
+            }
+            else{
+            ostringstream os;
+            os << *board[i][j];
+            row[row.size()] = os.str();
+            }
+        }
+        client_board[client_board.size()] = move(row);
+    }
+    return client_board;
 }

@@ -9,11 +9,11 @@ function Square ({color, piece, onSquareClick}){
   )
 }
 
-function EmptySquare (){
+function EmptySquare ({onEmptyClick}){
   return (
     <button 
       className="square-button"
-      onClick={()=>{}}
+      onClick={onEmptyClick}
     >
       piece
     </button>
@@ -22,6 +22,61 @@ function EmptySquare (){
 
 export default function Board() {
   const [board, setBoard] = useState(null);
+  const [midMove, setMidMove] = useState(null);
+  const [sourceRank, setSourceRank] = useState(null);
+  const [sourceRow, setSourceRow] = useState(null);
+
+
+  function handleClick( { rank, row }){
+    if (midMove) {
+      fetch(`http://localhost:18080/${sourceRank}/${sourceRow}/${rank}/${row}`)
+      .then((response) => {
+        if (!response.ok){
+          throw new Error("Network Response not OK");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setBoard(data);
+      })
+      .catch((error) => {
+        console.error("Fetch Error", error);
+      })
+      setMidMove(null);
+      setSourceRank(null);
+      setSourceRow(null);
+    }
+    else{
+      setSourceRank(rank);
+      setSourceRow(row);
+      setMidMove(true);
+      console.log(`${rank}, ${row}, ${midMove}`)
+    }
+    
+  }
+
+  function handleEmptyClick({rank,row}){
+    if (midMove) {
+      fetch(`http://localhost:18080/${sourceRank}/${sourceRow}/${rank}/${row}`)
+      .then((response) => {
+        if (!response.ok){
+          throw new Error("Network Response not OK");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setBoard(data);
+      })
+      .catch((error) => {
+        console.error("Fetch Error", error);
+      })
+      setMidMove(null);
+      setSourceRank(null);
+      setSourceRow(null);
+    }
+  }
 
   useEffect(() => {
     fetch("http://localhost:18080/board")
@@ -41,6 +96,8 @@ export default function Board() {
   }, []);
 
   return (
+    <>
+    <div><li>MidMove</li></div>
     <div className="board-container">
       <img src="/board.png" alt="Board" className="board-image" />
       <div className="board-grid">
@@ -51,15 +108,16 @@ export default function Board() {
                 key={`${rowIndex}-${squareIndex}`}
                 color={square.split(" ")[0]}
                 piece={square.split(" ")[1]}
-                onSquareClick={() => console.log("clicked", rowIndex, squareIndex)}
+                onSquareClick={() => handleClick({rank: squareIndex, row: rowIndex})}
               />
             ) : (
-              <EmptySquare key={`${rowIndex}-${squareIndex}`} />
+              <EmptySquare key={`${rowIndex}-${squareIndex}`} onEmptyClick={() => handleEmptyClick({rank:squareIndex, row: rowIndex})}/>
             )
           )
         ))}
       </div>
     </div>
+    </>
   );
 }
 

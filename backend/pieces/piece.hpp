@@ -24,7 +24,7 @@ class Piece{
 
     virtual void calc_possible_squares();
 
-    void move(pair<char,int> square);
+    bool move(pair<char,int> square);
 
     virtual ~Piece() {};
 

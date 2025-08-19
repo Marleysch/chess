@@ -14,7 +14,7 @@ Piece::Piece(string incolor, char rank, int row) : color(incolor),curr_square({r
     has_moved = 0;
 };
 
-void Piece::move(pair<char, int> square){
+bool Piece::move(pair<char, int> square){
     auto& curr_square_child = get_curr_square();
     auto& possible_squares_child = get_possible_squares();
  
@@ -87,9 +87,10 @@ void Piece::move(pair<char, int> square){
                 }
             }
         }
+        return 1;
     }      
     else{
-        cout << "you cant go there" << endl;
+        return 0;
     }
 };
 

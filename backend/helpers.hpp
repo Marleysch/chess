@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include "piece.hpp"
+#include "crow.h"
 using namespace std;
 
 extern Piece * board[8][8];
@@ -21,3 +22,4 @@ void print_board();
 
 void initialize_game();
 
+crow::json::wvalue build_client_board();
