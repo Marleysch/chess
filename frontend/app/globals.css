@@ -113,3 +113,9 @@ body {
   object-fit: contain; /* keeps aspect ratio */
   pointer-events: none; /* so clicks hit the button, not the image */
 }
+
+.game-container {
+  display: flex;
+  align-items: flex-start; /* keeps top aligned */
+  gap: 20px; /* spacing between board and text */
+}

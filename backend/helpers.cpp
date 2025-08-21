@@ -144,7 +144,7 @@ void initialize_game(){
     board[7][6] = new Knight("white ", 'g', 1);
     board[7][7] = new Rook("white ", 'h', 1);
     for (int i = 0; i < 8; i++){
-        board[the_maggie_function(2) - 1][i] = new Pawn("white " , number_to_letter(i), 2);
+        board[the_maggie_function(2) - 1][i] = new Pawn("white " , number_to_letter(i + 1), 2);
     }
     board[0][0] = new Rook("black ", 'a', 8);
     board[0][1] = new Knight("black ", 'b', 8);
@@ -155,7 +155,7 @@ void initialize_game(){
     board[0][6] = new Knight("black ", 'g', 8);
     board[0][7] = new Rook("black ", 'h', 8);
     for (int i = 0; i < 8; i++){
-        board[the_maggie_function(7) - 1][i] = new Pawn("black ", number_to_letter(i), 7);
+        board[the_maggie_function(7) - 1][i] = new Pawn("black ", number_to_letter(i + 1), 7);
     }
 
 

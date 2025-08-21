@@ -96,28 +96,31 @@ export default function Board() {
   }, []);
 
   return (
-    <>
-    <div><li>MidMove</li></div>
-    <div className="board-container">
-      <img src="/board.png" alt="Board" className="board-image" />
-      <div className="board-grid">
-        {board && board.map((row, rowIndex) => (
-          row.map((square, squareIndex) => 
-            square !== "Empty" ? (
-              <Square
-                key={`${rowIndex}-${squareIndex}`}
-                color={square.split(" ")[0]}
-                piece={square.split(" ")[1]}
-                onSquareClick={() => handleClick({rank: squareIndex, row: rowIndex})}
-              />
-            ) : (
-              <EmptySquare key={`${rowIndex}-${squareIndex}`} onEmptyClick={() => handleEmptyClick({rank:squareIndex, row: rowIndex})}/>
+    <div className='game-container'>
+      <div className="board-container">
+        <img src="/board.png" alt="Board" className="board-image" />
+        <div className="board-grid">
+          {board && board.map((row, rowIndex) => (
+            row.map((square, squareIndex) => 
+              square !== "Empty" ? (
+                <Square
+                  key={`${rowIndex}-${squareIndex}`}
+                  color={square.split(" ")[0]}
+                  piece={square.split(" ")[1]}
+                  onSquareClick={() => handleClick({rank: squareIndex, row: rowIndex})}
+                />
+              ) : (
+                <EmptySquare key={`${rowIndex}-${squareIndex}`} onEmptyClick={() => handleEmptyClick({rank:squareIndex, row: rowIndex})}/>
+              )
             )
-          )
-        ))}
+          ))}
+        </div>
       </div>
+      
+      {midMove && (
+        <p>mid move</p>
+      )}
     </div>
-    </>
   );
 }
 
