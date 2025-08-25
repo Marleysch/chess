@@ -98,6 +98,20 @@ body {
   align-items: center;
 }
 
+.square-button-highlighted {
+  border: 1px solid transparent; /* see actual button boundaries */
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background-color: pink;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .square-button:disabled {
   cursor: default;
   background-color: #eee;

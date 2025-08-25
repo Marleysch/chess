@@ -2,10 +2,10 @@
 
 import {useState, useEffect} from 'react';
 
-function Square ({color, piece, onSquareClick}){
+function Square ({color, piece, onSquareClick, highlighted}){
   const imgPath = "/pieces/" + color + "/" + piece + ".png";
   return(
-    <button className = "square-button"  onClick={onSquareClick}><img src={imgPath} className='chess-piece'/></button>
+    <button className = {highlighted}  onClick={onSquareClick}><img src={imgPath} className='chess-piece'/></button>
   )
 }
 
@@ -15,7 +15,6 @@ function EmptySquare ({onEmptyClick}){
       className="square-button"
       onClick={onEmptyClick}
     >
-      piece
     </button>
   )
 }
@@ -103,12 +102,30 @@ export default function Board() {
           {board && board.map((row, rowIndex) => (
             row.map((square, squareIndex) => 
               square !== "Empty" ? (
-                <Square
-                  key={`${rowIndex}-${squareIndex}`}
-                  color={square.split(" ")[0]}
-                  piece={square.split(" ")[1]}
-                  onSquareClick={() => handleClick({rank: squareIndex, row: rowIndex})}
-                />
+                (() => {
+                  if (rowIndex === sourceRow && squareIndex === sourceRank){
+                    return (
+                      <Square
+                        key={`${rowIndex}-${squareIndex}`}
+                        color={square.split(" ")[0]}
+                        piece={square.split(" ")[1]}
+                        onSquareClick={() => handleClick({rank: squareIndex, row: rowIndex})}
+                        highlighted={'square-button-highlighted'}
+                      />
+                    );
+                  }
+                  else {
+                    return (
+                      <Square
+                        key={`${rowIndex}-${squareIndex}`}
+                        color={square.split(" ")[0]}
+                        piece={square.split(" ")[1]}
+                        onSquareClick={() => handleClick({rank: squareIndex, row: rowIndex})}
+                        highlighted={'square-button'}
+                      />
+                    );
+                  }
+                })()
               ) : (
                 <EmptySquare key={`${rowIndex}-${squareIndex}`} onEmptyClick={() => handleEmptyClick({rank:squareIndex, row: rowIndex})}/>
               )
@@ -117,9 +134,6 @@ export default function Board() {
         </div>
       </div>
       
-      {midMove && (
-        <p>mid move</p>
-      )}
     </div>
   );
 }

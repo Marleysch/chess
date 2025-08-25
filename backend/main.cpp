@@ -19,26 +19,6 @@ int main(){
 
     initialize_game();
 
-    cout << "pawn at a2: " << board[6][0]->curr_square.first << board[6][0]->curr_square.second << endl;
-
-    for (auto& row : board){
-        for (auto& piece : row){
-            if (piece != nullptr){
-                cout << *piece  << "at " << piece->curr_square.first << piece->curr_square.second << "possible squares: ";
-
-                for (auto& space : piece->possible_squares){
-                    cout << space.first << space.second << ",";
-                }
-                cout << endl << endl;
-            }
-        }   
-    }
-    cout << endl;
-
-    board[6][0]->move({'a',4});
-
-    print_board();
-
     CROW_ROUTE(app, "/board")([](){
 
         return build_client_board();

@@ -22,29 +22,24 @@ vector<pair<char,int>>& Pawn::get_possible_squares(){
 }
 
 void Pawn::calc_possible_squares(){
-    cout << "starting pawn calc" << endl;
     possible_squares.clear();
     if (color == "white "){
         if (board[the_maggie_function(curr_square.second + 1) - 1][letter_to_number(curr_square.first) - 1] == nullptr){
             possible_squares.push_back({curr_square.first, curr_square.second  + 1});
-            cout << "checked white " << curr_square.first << curr_square.second + 1 << endl;
             if (!has_moved && board[the_maggie_function(curr_square.second + 2) - 1][letter_to_number(curr_square.first) - 1] == nullptr){
                 possible_squares.push_back({curr_square.first, curr_square.second + 2});
             }
         }
-        cout << "checked white " << curr_square.first << curr_square.second + 2;
         if (board[the_maggie_function(curr_square.second + 1) - 1][letter_to_number(curr_square.first + 1) - 1] != nullptr){
             if (board[the_maggie_function(curr_square.second + 1) - 1][letter_to_number(curr_square.first + 1) - 1]->color == "black "){
                 possible_squares.push_back({number_to_letter(letter_to_number(curr_square.first) + 1), curr_square.second + 1});
             }
-        cout << "checked left diagonal white" << endl;
         }
         if (board[the_maggie_function(curr_square.second + 1) - 1][letter_to_number(curr_square.first - 1) - 1] != nullptr){
             if (board[the_maggie_function(curr_square.second + 1) - 1][letter_to_number(curr_square.first - 1) - 1]->color == "black "){
                 possible_squares.push_back({number_to_letter(letter_to_number(curr_square.first) - 1), curr_square.second + 1});
             }
         }
-        cout << "checked right diagonal white" << endl;
     }
 
     if (color == "black "){
@@ -54,19 +49,16 @@ void Pawn::calc_possible_squares(){
                 possible_squares.push_back({curr_square.first, curr_square.second - 2});
             }
         }
-        cout << "checked black " << curr_square.first << curr_square.second - 2;
         if (board[the_maggie_function(curr_square.second - 1) - 1][letter_to_number(curr_square.first + 1) - 1] != nullptr){
             if (board[the_maggie_function(curr_square.second - 1) - 1][letter_to_number(curr_square.first + 1) - 1]->color == "white "){
                 possible_squares.push_back({number_to_letter(letter_to_number(curr_square.first) + 1), curr_square.second - 1});
             }
         }
-        cout << "checked black left diagonal" << endl;
         if (board[the_maggie_function(curr_square.second - 1) - 1][letter_to_number(curr_square.first - 1) - 1] != nullptr){
             if (board[the_maggie_function(curr_square.second - 1) - 1][letter_to_number(curr_square.first - 1) - 1]->color == "white "){
                 possible_squares.push_back({number_to_letter(letter_to_number(curr_square.first) - 1), curr_square.second - 1});
             }
         }
-        cout << "checked black right diagonal" << endl;
     }
 };
 
