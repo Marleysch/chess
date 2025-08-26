@@ -14,6 +14,7 @@ using namespace std;
 
 int main(){
     cout << "running main" << endl << endl;
+    string color = "white";
 
     crow::App<CORSHandler> app;
 
@@ -42,6 +43,19 @@ int main(){
 
         return build_client_board();
 
+    });
+
+    CROW_ROUTE(app, "/color")([&color](){
+        string old_color;
+        if (color == "white"){
+            old_color = color;
+            color = "black";
+        }
+        else {
+            old_color = color;
+            color = "white";
+        }
+        return old_color;
     });
 
     app.port(18080).multithreaded().run();

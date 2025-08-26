@@ -24,6 +24,24 @@ export default function Board() {
   const [midMove, setMidMove] = useState(null);
   const [sourceRank, setSourceRank] = useState(null);
   const [sourceRow, setSourceRow] = useState(null);
+  const [color, setColor] = useState(null);
+
+  useEffect(() => {
+    fetch(`http://localhost:18080/color`)
+    .then((response)=>{
+      if (!response.ok){
+        throw new Error("color fetch not ok")
+      } 
+      return response.text();
+    })
+    .then((data) => {
+      console.log(data);
+      setColor(data);
+    })
+    .catch((error) =>{
+      console.error("Fetch error", error)
+    })
+  }, []);
 
 
   function handleClick( { rank, row }){
@@ -94,48 +112,101 @@ export default function Board() {
     })
   }, []);
 
-  return (
-    <div className='game-container'>
-      <div className="board-container">
-        <img src="/board.png" alt="Board" className="board-image" />
-        <div className="board-grid">
-          {board && board.map((row, rowIndex) => (
-            row.map((square, squareIndex) => 
-              square !== "Empty" ? (
-                (() => {
-                  if (rowIndex === sourceRow && squareIndex === sourceRank){
-                    return (
-                      <Square
-                        key={`${rowIndex}-${squareIndex}`}
-                        color={square.split(" ")[0]}
-                        piece={square.split(" ")[1]}
-                        onSquareClick={() => handleClick({rank: squareIndex, row: rowIndex})}
-                        highlighted={'square-button-highlighted'}
-                      />
-                    );
-                  }
-                  else {
-                    return (
-                      <Square
-                        key={`${rowIndex}-${squareIndex}`}
-                        color={square.split(" ")[0]}
-                        piece={square.split(" ")[1]}
-                        onSquareClick={() => handleClick({rank: squareIndex, row: rowIndex})}
-                        highlighted={'square-button'}
-                      />
-                    );
-                  }
-                })()
-              ) : (
-                <EmptySquare key={`${rowIndex}-${squareIndex}`} onEmptyClick={() => handleEmptyClick({rank:squareIndex, row: rowIndex})}/>
+  function blackBoard(board){
+
+  }
+
+  if (color === "white"){
+    return (
+      <div className='game-container'>
+        <div className="board-container">
+          <img src="/board.png" alt="Board" className="board-image" />
+          <div className="board-grid">
+            {board && board.map((row, rowIndex) => (
+              row.map((square, squareIndex) => 
+                square !== "Empty" ? (
+                  (() => {
+                    if (rowIndex === sourceRow && squareIndex === sourceRank){
+                      return (
+                        <Square
+                          key={`${rowIndex}-${squareIndex}`}
+                          color={square.split(" ")[0]}
+                          piece={square.split(" ")[1]}
+                          onSquareClick={() => handleClick({rank: squareIndex, row: rowIndex})}
+                          highlighted={'square-button-highlighted'}
+                        />
+                      );
+                    }
+                    else {
+                      return (
+                        <Square
+                          key={`${rowIndex}-${squareIndex}`}
+                          color={square.split(" ")[0]}
+                          piece={square.split(" ")[1]}
+                          onSquareClick={() => handleClick({rank: squareIndex, row: rowIndex})}
+                          highlighted={'square-button'}
+                        />
+                      );
+                    }
+                  })()
+                ) : (
+                  <EmptySquare key={`${rowIndex}-${squareIndex}`} onEmptyClick={() => handleEmptyClick({rank:squareIndex, row: rowIndex})}/>
+                )
               )
-            )
-          ))}
+            ))}
+          </div>
         </div>
+        
       </div>
-      
-    </div>
-  );
+    );
+  }
+  else if (color === "black"){
+    return (
+      <div className='game-container'>
+        <div className="board-container">
+          <img src="/board.png" alt="Board" className="board-image" />
+          <div className="board-grid">
+            {board && board.slice().reverse().map((row, rowIndex) => (
+              row.map((square, squareIndex) => 
+                square !== "Empty" ? (
+                  (() => {
+                    if (rowIndex === sourceRow && squareIndex === sourceRank){
+                      return (
+                        <Square
+                          key={`${rowIndex}-${squareIndex}`}
+                          color={square.split(" ")[0]}
+                          piece={square.split(" ")[1]}
+                          onSquareClick={() => handleClick({rank: squareIndex, row: rowIndex})}
+                          highlighted={'square-button-highlighted'}
+                        />
+                      );
+                    }
+                    else {
+                      return (
+                        <Square
+                          key={`${rowIndex}-${squareIndex}`}
+                          color={square.split(" ")[0]}
+                          piece={square.split(" ")[1]}
+                          onSquareClick={() => handleClick({rank: squareIndex, row: rowIndex})}
+                          highlighted={'square-button'}
+                        />
+                      );
+                    }
+                  })()
+                ) : (
+                  <EmptySquare key={`${rowIndex}-${squareIndex}`} onEmptyClick={() => handleEmptyClick({rank:squareIndex, row: rowIndex})}/>
+                )
+              )
+            ))}
+          </div>
+        </div>
+        
+      </div>
+    );
+  }
+  else{
+    return <div>Loading...</div>;
+  }
 }
 
 

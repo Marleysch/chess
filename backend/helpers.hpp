@@ -8,6 +8,7 @@ using namespace std;
 
 extern Piece * board[8][8];
 
+
 bool check_membership(pair<char, int> item, vector<pair<char,int>> vector, int array_size);
 
 int letter_to_number(char letter);
