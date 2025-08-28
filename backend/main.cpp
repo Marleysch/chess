@@ -1,4 +1,6 @@
 #include <iostream>
+#include <vector>
+#include <algorithm>
 #include "helpers.hpp"
 #include "knight.hpp"
 #include "piece.hpp"
@@ -15,47 +17,71 @@ using namespace std;
 int main(){
     cout << "running main" << endl << endl;
     string color = "white";
+    string turn = "white";
+    vector<crow::websocket::connection*> connections;
 
     crow::App<CORSHandler> app;
 
     initialize_game();
 
-    CROW_ROUTE(app, "/board")([](){
+    CROW_ROUTE(app, "/start")([&color, &turn](){
 
-        return build_client_board();
+        crow::json::wvalue start_values;
+
+        string old_color = color;
+        if (color == "white"){
+            color = "black";
+        }
+        else{
+            color = "white";
+        }
+        
+        start_values["board"] = build_client_board();
+        start_values["color"] = old_color;
+        start_values["turn"] = turn;
+
+        return start_values;
     });
 
-    CROW_ROUTE(app, "/<int>/<int>/<int>/<int>")([](int p1rank, int p1row, int p2rank, int p2row){
-
-        cout << "source space: " << p1rank << p1row << endl;
-        cout << "target space: " << p2rank << p2row << endl;
+    CROW_ROUTE(app, "/<int>/<int>/<int>/<int>")([&turn, &connections](int p1rank, int p1row, int p2rank, int p2row){
 
         char p2rankletter = number_to_letter(p2rank + 1);
         p2row = the_maggie_function(p2row + 1);
 
-        cout << "target space: " << p2rankletter << p2row << endl;
-
         bool result = board[p1row][p1rank]->move({p2rankletter, p2row});
 
-        cout << result << endl;
+        string old_turn = turn;
+        if (result){
+            if (turn == "white"){
+                turn = "black";
+            }
+            else if(turn == "black"){
+                turn = "white";
+            }
+        }
 
-        print_board();
+        crow::json::wvalue board_and_turn;
+        board_and_turn["board"] = build_client_board();
+        board_and_turn["turn"] = old_turn;
 
-        return build_client_board();
+        string msg = board_and_turn.dump();
 
+        for (auto& conn_ptr: connections){
+            conn_ptr->send_text(msg);
+        }
+
+        return board_and_turn;
     });
 
-    CROW_ROUTE(app, "/color")([&color](){
-        string old_color;
-        if (color == "white"){
-            old_color = color;
-            color = "black";
-        }
-        else {
-            old_color = color;
-            color = "white";
-        }
-        return old_color;
+    CROW_WEBSOCKET_ROUTE(app, "/ws") 
+    .onopen([&](crow::websocket::connection& conn){ 
+        connections.push_back(&conn);
+    }) 
+    .onmessage([&](crow::websocket::connection& conn, const std::string& msg, bool is_binary){
+        // handle incoming messages 
+    }) 
+    .onclose([&](crow::websocket::connection& conn, const std::string& reason, uint16_t with_status_code ){ 
+        connections.erase(remove(connections.begin(), connections.end(), &conn), connections.end());
     });
 
     app.port(18080).multithreaded().run();
