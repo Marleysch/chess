@@ -108,7 +108,7 @@ export default function Board() {
     const socket = new WebSocket("ws://localhost:18080/ws");
 
     socket.onmessage = (event) => {
-      const data = JSON.parse(event);
+      const data = JSON.parse(event.data);
       setBoard(data.board);
       setTurn(data.turn);
     }

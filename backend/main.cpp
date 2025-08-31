@@ -66,6 +66,8 @@ int main(){
 
         string msg = board_and_turn.dump();
 
+        cout << msg << endl;
+
         for (auto& conn_ptr: connections){
             conn_ptr->send_text(msg);
         }
