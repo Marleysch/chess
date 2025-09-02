@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <fstream>
 #include "helpers.hpp"
 #include "knight.hpp"
 #include "piece.hpp"
@@ -14,6 +15,12 @@
 using namespace std;
 
 
+string loadfile(const string& path){
+        ifstream in(path, ios::in | ios::binary);
+        if (!in) return "";
+        return string(istreambuf_iterator<char>(in), istreambuf_iterator<char>());
+    };
+
 int main(){
     cout << "running main" << endl << endl;
     string color = "white";
@@ -23,6 +30,8 @@ int main(){
     crow::App<CORSHandler> app;
 
     initialize_game();
+
+
 
     CROW_ROUTE(app, "/start")([&color, &turn](){
 
@@ -86,6 +95,21 @@ int main(){
         connections.erase(remove(connections.begin(), connections.end(), &conn), connections.end());
     });
 
-    app.port(18080).multithreaded().run();
+    CROW_ROUTE(app, "/")([](){
+        return loadfile("../frontend/out/index.html");
+    });
 
+    CROW_ROUTE(app, "/<path>")([]( crow::response& res, string path){
+        string new_path = "../frontend/out/" + path;
+        if (ifstream(new_path)){
+            res.write(loadfile(new_path));
+            res.end();
+        }
+        else{
+            res.write("../frontend/out/index.html");
+            res.end();
+        }
+    });
+
+    app.port(18080).multithreaded().run();
 };

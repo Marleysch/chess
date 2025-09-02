@@ -31,7 +31,10 @@ export default function Board() {
   function handleClick( { rank, row }){
     if (color === turn){
       if (midMove) {
-        fetch(`http://localhost:18080/${sourceRank}/${sourceRow}/${rank}/${row}`)
+        //ngrok
+        fetch(`/${sourceRank}/${sourceRow}/${rank}/${row}`)
+        //local
+        // fetch(`http://localhost:18080/${sourceRank}/${sourceRow}/${rank}/${row}`)
         .then((response) => {
           if (!response.ok){
             throw new Error("Network Response not OK");
@@ -63,7 +66,10 @@ export default function Board() {
   function handleEmptyClick({rank,row}){
     if (turn === color){
       if (midMove) {
-        fetch(`http://localhost:18080/${sourceRank}/${sourceRow}/${rank}/${row}`)
+        //ngrok
+        fetch(`/${sourceRank}/${sourceRow}/${rank}/${row}`)
+        //local
+        // fetch(`http://localhost:18080/${sourceRank}/${sourceRow}/${rank}/${row}`)
         .then((response) => {
           if (!response.ok){
             throw new Error("Network Response not OK");
@@ -86,7 +92,10 @@ export default function Board() {
   }
 
   useEffect(() => {
-    fetch("http://localhost:18080/start")
+    //ngrok
+    fetch("/start")
+    //local
+    //fetch("http://localhost:18080/start")
     .then((response) => {
       if (!response.ok){
         throw new Error("Network Response not OK");
