@@ -31,7 +31,7 @@ int main(){
 
     initialize_game();
 
-
+    print_board();
 
     CROW_ROUTE(app, "/start")([&color, &turn](){
 
@@ -54,14 +54,15 @@ int main(){
 
     CROW_ROUTE(app, "/<int>/<int>/<int>/<int>")([&turn, &connections](int p1rank, int p1row, int p2rank, int p2row){
 
+        cout << "row and rank: " << p1row << p1rank << "goes to rank and row: " << p2row << p2rank << endl;
+
         char p2rankletter = number_to_letter(p2rank + 1);
         p2row = the_maggie_function(p2row + 1);
 
-        cout << "row and rank: " << p1row << p1rank << "goes to rank and row: " << p2row << p2rank << endl << endl;
+        cout << "row and rank: " << p1row << p1rank << "goes to rank and row: " << p2row << p2rankletter << endl << endl;
 
         bool result = board[p1row][p1rank]->move({p2rankletter, p2row});
 
-        string old_turn = turn;
         if (result){
             if (turn == "white"){
                 turn = "black";
@@ -73,7 +74,7 @@ int main(){
 
         crow::json::wvalue board_and_turn;
         board_and_turn["board"] = build_client_board();
-        board_and_turn["turn"] = old_turn;
+        board_and_turn["turn"] = turn;
 
         string msg = board_and_turn.dump();
 

@@ -28,8 +28,8 @@ export default function Board() {
   const [turn, setTurn] = useState(null);
 
 
-  function handleClick( { rank, row }){
-    if (color === turn){
+  function handleClick( { rank, row, pieceColor }){
+    if (color === turn && color === pieceColor){
       if (midMove) {
         //ngrok
         // fetch(`/${sourceRank}/${sourceRow}/${rank}/${row}`)
@@ -144,7 +144,7 @@ export default function Board() {
                           key={`${rowIndex}-${squareIndex}`}
                           color={square.split(" ")[0]}
                           piece={square.split(" ")[1]}
-                          onSquareClick={() => handleClick({rank: squareIndex, row: rowIndex})}
+                          onSquareClick={() => handleClick({rank: squareIndex, row: rowIndex, pieceColor: square.split(" ")[0]})}
                           highlighted={'square-button-highlighted'}
                         />
                       );
@@ -155,7 +155,7 @@ export default function Board() {
                           key={`${rowIndex}-${squareIndex}`}
                           color={square.split(" ")[0]}
                           piece={square.split(" ")[1]}
-                          onSquareClick={() => handleClick({rank: squareIndex, row: rowIndex})}
+                          onSquareClick={() => handleClick({rank: squareIndex, row: rowIndex, pieceColor: square.split(" ")[0]})}
                           highlighted={'square-button'}
                         />
                       );
@@ -179,16 +179,16 @@ export default function Board() {
           <img src="/board.png" alt="Board" className="board-image" />
           <div className="board-grid">
             {board && board.slice().reverse().map((row, rowIndex) => (
-              row.map((square, squareIndex) => 
+              row.slice().reverse().map((square, squareIndex) => 
                 square !== "Empty" ? (
                   (() => {
-                    if (7 - rowIndex === sourceRow && squareIndex === sourceRank){
+                    if (7 - rowIndex === sourceRow && 7 - squareIndex === sourceRank){
                       return (
                         <Square
                           key={`${rowIndex}-${squareIndex}`}
                           color={square.split(" ")[0]}
                           piece={square.split(" ")[1]}
-                          onSquareClick={() => handleClick({rank: squareIndex, row: 7 - rowIndex})}
+                          onSquareClick={() => handleClick({rank: 7 - squareIndex, row: 7 - rowIndex, pieceColor: square.split(" ")[0]})}
                           highlighted={'square-button-highlighted'}
                         />
                       );
@@ -199,14 +199,14 @@ export default function Board() {
                           key={`${rowIndex}-${squareIndex}`}
                           color={square.split(" ")[0]}
                           piece={square.split(" ")[1]}
-                          onSquareClick={() => handleClick({rank: squareIndex, row: 7 - rowIndex})}
+                          onSquareClick={() => handleClick({rank: 7 - squareIndex, row: 7 - rowIndex, pieceColor: square.split(" ")[0]})}
                           highlighted={'square-button'}
                         />
                       );
                     }
                   })()
                 ) : (
-                  <EmptySquare key={`${rowIndex}-${squareIndex}`} onEmptyClick={() => handleEmptyClick({rank:squareIndex, row: 7 - rowIndex})}/>
+                  <EmptySquare key={`${rowIndex}-${squareIndex}`} onEmptyClick={() => handleEmptyClick({rank: 7 - squareIndex, row: 7 - rowIndex})}/>
                 )
               )
             ))}

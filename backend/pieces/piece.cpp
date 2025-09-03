@@ -15,6 +15,7 @@ Piece::Piece(string incolor, char rank, int row) : color(incolor),curr_square({r
 };
 
 bool Piece::move(pair<char, int> square){
+    cout << *this << endl;
     auto& curr_square_child = get_curr_square();
     auto& possible_squares_child = get_possible_squares();
  
@@ -71,6 +72,8 @@ bool Piece::move(pair<char, int> square){
 
         //moving
         curr_square_child = square;
+        cout << "before flipped" << curr_square_child.first << curr_square_child.second << endl;
+        cout << "after flipped" << letter_to_number(curr_square_child.first) - 1 << the_maggie_function(curr_square_child.second) - 1 << endl;
         has_moved = 1;
         if (board[the_maggie_function(square.second)-1][letter_to_number(square.first)-1] != nullptr){
             delete board[the_maggie_function(square.second)-1][letter_to_number(square.first)-1];

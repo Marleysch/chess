@@ -138,8 +138,8 @@ void initialize_game(){
     board[7][0] = new Rook("white ", 'a', 1);
     board[7][1] = new Knight("white ", 'b', 1);
     board[7][2] = new Bishop("white ", 'c', 1);
-    board[7][3] = new King("white ", 'e', 1);
-    board[7][4] = new Queen("white ", 'd', 1);
+    board[7][3] = new Queen("white ", 'd', 1);
+    board[7][4] = new King("white ", 'e', 1);
     board[7][5] = new Bishop("white ", 'f', 1);
     board[7][6] = new Knight("white ", 'g', 1);
     board[7][7] = new Rook("white ", 'h', 1);
@@ -149,8 +149,8 @@ void initialize_game(){
     board[0][0] = new Rook("black ", 'a', 8);
     board[0][1] = new Knight("black ", 'b', 8);
     board[0][2] = new Bishop("black ", 'c', 8);
-    board[0][3] = new King("black ", 'e', 8);
-    board[0][4] = new Queen("black ", 'd', 8);
+    board[0][3] = new Queen("black ", 'd', 8);
+    board[0][4] = new King("black ", 'e', 8);
     board[0][5] = new Bishop("black ", 'f', 8);
     board[0][6] = new Knight("black ", 'g', 8);
     board[0][7] = new Rook("black ", 'h', 8);
