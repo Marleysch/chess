@@ -1,7 +1,0 @@
-game loop
-    -pawn can transfrom at end
-    -remove en passant as possible move if it is not taken right away
-add en passant to move
-change king calcpossiblesquares so it doesnt change currsquare until after checking
-
-
