@@ -32,9 +32,9 @@ export default function Board() {
     if (color === turn){
       if (midMove) {
         //ngrok
-        fetch(`/${sourceRank}/${sourceRow}/${rank}/${row}`)
+        // fetch(`/${sourceRank}/${sourceRow}/${rank}/${row}`)
         //local
-        // fetch(`http://localhost:18080/${sourceRank}/${sourceRow}/${rank}/${row}`)
+        fetch(`http://localhost:18080/${sourceRank}/${sourceRow}/${rank}/${row}`)
         .then((response) => {
           if (!response.ok){
             throw new Error("Network Response not OK");
@@ -67,9 +67,9 @@ export default function Board() {
     if (turn === color){
       if (midMove) {
         //ngrok
-        fetch(`/${sourceRank}/${sourceRow}/${rank}/${row}`)
+        // fetch(`/${sourceRank}/${sourceRow}/${rank}/${row}`)
         //local
-        // fetch(`http://localhost:18080/${sourceRank}/${sourceRow}/${rank}/${row}`)
+        fetch(`http://localhost:18080/${sourceRank}/${sourceRow}/${rank}/${row}`)
         .then((response) => {
           if (!response.ok){
             throw new Error("Network Response not OK");
@@ -93,9 +93,9 @@ export default function Board() {
 
   useEffect(() => {
     //ngrok
-    fetch("/start")
+    // fetch("/start")
     //local
-    //fetch("http://localhost:18080/start")
+    fetch("http://localhost:18080/start")
     .then((response) => {
       if (!response.ok){
         throw new Error("Network Response not OK");

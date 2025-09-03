@@ -57,6 +57,8 @@ int main(){
         char p2rankletter = number_to_letter(p2rank + 1);
         p2row = the_maggie_function(p2row + 1);
 
+        cout << "row and rank: " << p1row << p1rank << "goes to rank and row: " << p2row << p2rank << endl << endl;
+
         bool result = board[p1row][p1rank]->move({p2rankletter, p2row});
 
         string old_turn = turn;
